@@ -258,34 +258,37 @@ h1{
 
 #caption{
   position:absolute;
-  bottom:90px;
+  top:20px;
   left:50%;
   transform:translateX(-50%);
-  max-width:85%;
-  text-align:center;
 
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  max-width:80%;
+  padding:10px 22px;
 
   background: linear-gradient(
     135deg,
-    rgba(0,0,0,.55),
-    rgba(0,0,0,.25)
+    rgba(0,0,0,.75),
+    rgba(0,0,0,.45)
   );
 
-  border:1px solid rgba(255,255,255,.25);
-  box-shadow:0 12px 40px rgba(0,0,0,.45);
+  border-radius:30px;
+  border:1px solid rgba(255,255,255,.35);
 
-  padding:14px 18px;
-  border-radius:14px;
-
-  font-size:15px;
-  line-height:1.5;
-  letter-spacing:.4px;
   color:#fff;
+  font-size:16px;
+  font-weight:600;
+  letter-spacing:.6px;
+  text-align:center;
+  line-height:1.4;
 
-  white-space: normal;
-  word-break: break-word;
+  box-shadow:
+    0 10px 30px rgba(0,0,0,.6),
+    inset 0 0 0 1px rgba(255,255,255,.08);
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  z-index:20;
 }
 
 
@@ -753,6 +756,7 @@ function toggleFS(){!document.fullscreenElement?document.documentElement.request
 </script>
 </body>
 </html>
+
 
 
 
