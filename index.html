@@ -258,19 +258,36 @@ h1{
 
 #caption{
   position:absolute;
-  bottom:80px;
+  bottom:90px;
   left:50%;
   transform:translateX(-50%);
-  backdrop-filter: blur(12px);
-  background: rgba(255,255,255,.12);
+  max-width:85%;
+  text-align:center;
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  background: linear-gradient(
+    135deg,
+    rgba(0,0,0,.55),
+    rgba(0,0,0,.25)
+  );
+
   border:1px solid rgba(255,255,255,.25);
-  box-shadow:0 10px 40px rgba(0,0,0,.4);
-  padding:10px 16px;
-  border-radius:10px;
+  box-shadow:0 12px 40px rgba(0,0,0,.45);
+
+  padding:14px 18px;
+  border-radius:14px;
+
   font-size:15px;
-  letter-spacing:1px;
-  color:var(--text);
+  line-height:1.5;
+  letter-spacing:.4px;
+  color:#fff;
+
+  white-space: normal;
+  word-break: break-word;
 }
+
 
 #bottom{
   position:absolute;
@@ -396,18 +413,15 @@ body::after{
   }
 }
 
-  @media (max-width: 768px){
-
+ @media (max-width:768px){
   #caption{
-    position: absolute;
-    bottom: 160px;
-    width: 92%;
-    text-align: center;
-    font-size: 13px;
-    padding: 8px 12px;
-    z-index: 10;
+    bottom:130px;
+    font-size:13px;
+    padding:12px 14px;
+    max-width:92%;
   }
 }
+
 
 @media (max-width: 768px){
 
@@ -739,6 +753,7 @@ function toggleFS(){!document.fullscreenElement?document.documentElement.request
 </script>
 </body>
 </html>
+
 
 
 
