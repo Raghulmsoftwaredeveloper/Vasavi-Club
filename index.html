@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Premium Album – 3D Carousel</title>
+<style>
+/* ================= THEME ================= */
+:root{
+  --bg:#0b0f1a;
+  --card:rgba(255,255,255,.05);
+  --border:rgba(255,255,255,.1);
+  --text:#fff;
+  --a1:#ff0080;
+  --a2:#00eaff;
+}
+.light{
+  --bg:#f4f7fb;
+  --card:rgba(255,255,255,.06);
+  --border:rgba(0,0,0,.15);
+  --text:#000;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Poppins,system-ui;
+  color:var(--text);
+  overflow:hidden;
+  position:relative;
+
+  background: linear-gradient(
+    -45deg,
+    var(--bg),
+    color-mix(in srgb, var(--bg) 85%, #000),
+    var(--bg)
+  );
+
+  background-size:400% 400%;
+  animation:gradientBG 15s ease infinite;
+}
+.light .particles{
+  background:
+    radial-gradient(circle at 20% 30%,rgba(0,0,0,.06),transparent 40%),
+    radial-gradient(circle at 80% 70%,rgba(0,140,255,.08),transparent 40%);
+}
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  box-shadow:inset 0 0 120px rgba(0,0,0,.65);
+}
+
+.light body::after{
+  box-shadow:inset 0 0 80px rgba(0,0,0,.18);
+}
+.light #caption{
+  background: rgba(255,255,255,.85);
+  color:#111;
+  border:1px solid rgba(0,0,0,.15);
+}
+.light #bottom{
+  background: rgba(255,255,255,.7);
+}
+.light .card:hover{
+  box-shadow:0 14px 30px rgba(0,0,0,.18);
+}
+
+
+/* ================= ANIMATED GRADIENT ================= */
+@keyframes gradientBG{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+/* ================= PARTICLE BACKGROUND ================= */
+.particles{
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at 20% 30%,rgba(255,255,255,.06),transparent 40%),
+    radial-gradient(circle at 80% 70%,rgba(0,234,255,.06),transparent 40%);
+  animation: float 20s infinite linear;
+  pointer-events:none;
+  z-index:-1;
+}
+@keyframes float{
+  from{transform:translateY(0)}
+  to{transform:translateY(-200px)}
+}
+
+/* ================= HEADER ================= */
+header{
+  padding:20px 30px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+h1{
+  font-size:2.5rem;
+  margin:0;
+  background: linear-gradient(90deg,var(--a1),var(--a2));
+  -webkit-background-clip:text;
+  color:transparent;
+  animation: shine 3s infinite;
+  align-content: center;
+}
+@keyframes shine{
+  0%,100%{background-position:0%}
+  50%{background-position:100%}
+}
+.controls button{
+  margin-left:8px;
+  padding:8px 12px;
+  border-radius:8px;
+  border:1px solid var(--border);
+  background:var(--card);
+  color:var(--text);
+  cursor:pointer;
+  transition:.3s;
+}
+.controls button:hover{
+  transform:scale(1.1);
+  box-shadow: 0 0 15px #00eaff;
+}
+
+/* ================= HOME ================= */
+#home{
+  display:flex;
+  justify-content:center;
+  gap:40px;
+  margin-top:100px;
+  position:relative;
+}
+.card{
+  width:320px;height:220px;
+  border-radius:22px;
+  background: var(--card);
+  border:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:26px;
+  cursor:pointer;
+  transition: transform 0.5s, box-shadow 0.5s;
+  position:relative;
+  overflow:hidden;
+  opacity:0;
+  transform: translateY(50px);
+  animation: slideIn 1s forwards;
+}
+.card:nth-child(1){animation-delay:.2s}
+.card:nth-child(2){animation-delay:.4s}
+
+.card:hover{
+  transform: translateY(-15px) rotateY(10deg);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+}
+.card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(120deg,transparent,rgba(255,255,255,.2),transparent);
+  transform:translateX(-100%);
+}
+.card:hover::after{
+  transform:translateX(100%);
+  transition:.8s;
+}
+.controls{
+  display:flex;
+  gap:10px;
+}
+
+.controls button{
+  width:42px;
+  height:42px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,0.18);
+
+  background: linear-gradient(
+    145deg,
+    rgba(255,255,255,0.12),
+    rgba(255,255,255,0.02)
+  );
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  color:var(--text);
+  font-size:18px;
+
+  cursor:pointer;
+  transition: 
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+/* Hover – clean & professional */
+.controls button:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+  background: linear-gradient(
+    145deg,
+    rgba(255,255,255,0.2),
+    rgba(255,255,255,0.05)
+  );
+}
+
+/* Active click */
+.controls button:active{
+  transform: scale(0.96);
+}
+
+
+@keyframes slideIn{
+  to{opacity:1; transform:translateY(0);}
+}
+
+/* ================= 3D SLIDESHOW ================= */
+#slideshow{
+  display:none;
+  height:calc(100vh - 120px);
+  perspective:1200px;
+  position:relative;
+  overflow:hidden;
+}
+
+#stage{
+  width:100%;
+  height:100%;
+  position:relative;
+  transform-style: preserve-3d;
+  transition: transform 1s;
+}
+
+#stage img{
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:400px;
+  height:250px;
+  object-fit:cover;
+  border-radius:18px;
+  box-shadow:0 20px 60px rgba(0,0,0,0.6);
+  transform-origin:center center -500px;
+  transition: transform 1s, opacity 1s;
+  opacity:0;
+}
+
+#caption{
+  position:absolute;
+  bottom:80px;
+  left:50%;
+  transform:translateX(-50%);
+  backdrop-filter: blur(12px);
+  background: rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.25);
+  box-shadow:0 10px 40px rgba(0,0,0,.4);
+  padding:10px 16px;
+  border-radius:10px;
+  font-size:15px;
+  letter-spacing:1px;
+  color:var(--text);
+}
+
+#bottom{
+  position:absolute;
+  bottom:0;left:0;right:0;
+  display:flex;
+  gap:10px;
+  padding:10px;
+  background:rgba(0,0,0,.3);
+}
+#thumbs{
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  flex:1;
+}
+#thumbs img{
+  width:90px;height:60px;
+  border-radius:8px;
+  opacity:.6;
+  cursor:pointer;
+}
+#thumbs img.active{
+  opacity:1;
+  border:2px solid var(--a2);
+}
+#bottom button{
+  padding:8px 12px;
+  border-radius:8px;
+  border:1px solid var(--border);
+  background:var(--card);
+  color:var(--text);
+}
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  box-shadow:inset 0 0 120px rgba(0,0,0,.7);
+}
+
+/* ================= INTRO ================= */
+#intro{
+  position:fixed;
+  inset:0;
+  z-index:999;
+  background:black;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+}
+#intro video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+#enterBtn{
+  position:absolute;
+  bottom:60px;
+  padding:14px 30px;
+  font-size:18px;
+  border-radius:30px;
+  border:2px solid #fff;
+  background:rgba(0,0,0,.4);
+  color:#fff;
+  cursor:pointer;
+  backdrop-filter:blur(6px);
+  animation:pulse 2s infinite;
+}
+@keyframes pulse{
+  50%{transform:scale(1.08)}
+}
+.fadeOut{
+  animation:fadeOut 1.2s forwards;
+}
+@keyframes fadeOut{
+  to{opacity:0;visibility:hidden}
+}
+#loader{
+  position:fixed;inset:0;
+  background:#000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:50;
+}
+#loader div{
+  width:70px;height:70px;
+  border:6px solid #333;
+  border-top:6px solid var(--a1);
+  border-radius:50%;
+  animation:spin 1s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+
+<div class="particles"></div>
+
+<!-- CINEMATIC INTRO -->
+<div id="intro">
+  <video src="intro.mp4" autoplay muted playsinline></video>
+  <button id="enterBtn">✨ Enter Album</button>
+  
+</div>
+
+<div id="loader"><div></div></div>
+
+<header>
+  <div>
+    <h1>Vasavi Club Vanitha Elite Hosur Scrap Book Presentation</h1>
+    <small>Created by <b>Simrasim Rockers</b></small>
+  </div>
+  <div class="controls">
+    <button onclick="toggleTheme()">🌓</button>
+    <button onclick="toggleMusic()">🎵</button>
+    <button onclick="toggleFS()">⤢</button>
+  </div>
+</header>
+
+<div id="home">
+  <div class="card" onclick="openShow('creativity')">🎨 Creativity</div>
+  <div class="card" onclick="openShow('logical')">📐 Logical</div>
+</div>
+
+<div id="slideshow">
+  <div id="stage"></div>
+  <div id="caption"></div>
+  <div id="bottom">
+    <div id="thumbs"></div>
+    <button onclick="prev()">⟨</button>
+    <button onclick="playPause()" id="pp">Pause</button>
+    <button onclick="next()">⟩</button>
+    <button onclick="back()">⬅ Back</button>
+  </div>
+</div>
+
+<audio id="music" loop>
+  <source src="music.mp3" type="audio/mp3">
+</audio>
+
+<script>
+/* PHOTOS */
+const creativity=[
+  {src:"photos/1.jpg",cap:"Vasavi Club Vanitha PST Installation 2025 1st Jan..."},
+  {src:"photos/2.jpg",cap:"Shankranthi Celebration @ Vidyanikethan Orphanage and Rangoli Competition @ Arya Vysya Nilayam 15th Jan 2025..."},
+  {src:"photos/3.jpg",cap:"Vasavi Agni Pravesham ; 102 Gothrala Design , celebration in SKPD temple, Hosur"},
+  {src:"photos/4.jpg",cap:"Food Distributed to Needy People Near GH Hosur on PUNARVASU Nakshathram on 10th Feb 2025"},
+  {src:"photos/6.jpg",cap:"Maha Shivaratri, Rudhrabhishekam, Shiva Temple on 26th Feb 2025"},
+  {src:"photos/7.jpg",cap:"Women's Day Celebration, Honoured Women's at Different Field and RC visit on 10th March 2025"},
+  {src:"photos/9.jpg",cap:"Hosur Car Fest - Food Distribution on 14th March"},
+  {src:"photos/11.jpg",cap:"Sri Rama Navami Done Parayanama along with Club members on 6th April 2025"},
+  {src:"photos/12.jpg",cap:"Done Paper work of 7 Avatars of Vishnu from Matsaya Avatar to Sri Rama Avatar"},
+  {src:"photos/16.jpg",cap:"Celebrated International Yoga Day by Honouring Yoga Girl on 21st June 2025"},
+  {src:"photos/17.jpg",cap:"Celebrated Friendship Day with Club Members on 3rd August 2025"},
+  {src:"photos/18.jpg",cap:"Krishna Janmashtami Celebrated in Goshala by making Pooja and Feeding to Cow on 16th August 2025"},
+  {src:"photos/20.jpg",cap:"INP Goodwill Visit on 30th August 2025"},
+  {src:"photos/21.jpg",cap:"Trip to Kubera Lakshmi Temple Bannerghatta Bangalore with Club Members on 16th September 2025"},
+  {src:"photos/21.jpg",cap:"5 feet Hand Craft Model of Club Logo by using Glitter sheets for 2025 and Presented in INP Goodwill Visit on 30th August 2025"},
+
+];
+const logical=[
+  {src:"photos/5.jpg",cap:"We made design using Tablet Cover because Our Zone Chairperson is a best and kindly Doctor5"},
+  {src:"photos/8.jpg",cap:"We made design using Sugar and salt Because of Sugar and BP test"},
+  {src:"photos/10.jpg",cap:"We made Design using Mango seed, Chilli seed, Banana Leaf and Neam Leaf which we use on Ugadi Festival"},
+  {src:"photos/13.jpg",cap:"We Made Jackpot Design using Gold and Silver Glitter sheet as Coins coming out from pot and Shells for Akshaya Tritiya"},
+  {src:"photos/14.jpg",cap:"We made this Design as  seasonal foods fan all the mothers feed their children as this in different seasons... For Mother's Day"},
+  {src:"photos/15.jpg",cap:"We made this Design of Animals and a Mixed animal using ragi and sweet corn hairs and many for World Environmental Day which gives natural Look of this Design"},
+  {src:"photos/19.jpg",cap:"We made this Design using bangles and coconut for Ammavaru when we donate saree to goddess"},
+  {src:"photos/22.jpg",cap:"We made this Arch Design by thought of nine colors of nine days celebration of Navaratri \
+1st Day - White Color for Shailaputri Devi\
+2nd Day - Red color for Brahmacharini Devi\
+3rd Day - Royal Blue for Chandraghanta Devi"},
+  {src:"photos/23.jpg",cap:"We made this Arch Design by thought of nine colors of nine days celebration of Navaratri \
+4th Day - Yellow Color for Kushmanda Devi\
+5th Day - Green color for Skandamata \
+6th Day - Grey for Kathyayini Devi"},
+  {src:"photos/24.jpg",cap:"We made this Arch Design by thought of nine colors of nine days celebration of Navaratri \
+7th Day - Orange Color for Kalaratri \
+8th Day - Peacock Green color for Maha Gouri Devi\
+9th Day - Pink for Siddhidatri Devi"},
+  {src:"photos/25.jpg",cap:"We made this Design by\
+1. the thought of Ayudha Pooja making below the Bunny Chettu for Ayudha Pooja Celebration \
+2. Durga Parameshwari Temple Dwaram(Door) for Vijaya Dashami"},
+  {src:"photos/26.jpg",cap:"Opened Dwaram Of Durga Temple"},
+  {src:"photos/27.jpg",cap:"Trip to Hassan for Hassanamba Temple with club members and Visited Ancient Temples on 15th October 2025 Only 12 Days open of Hassanamba Temple in a year only in Diwali Season, so we made this ammavaru Design using match stick"},
+  {src:"photos/28.jpg",cap:"Last Page of Scrap Book has Designed the story model of Vasavi Devi Agni Pravesham and Vishwa Roopam Dharshanam of Sri Vasavi Kanyaka Parameshwari in Penugonda and Arya Vysyas Originated from Cow's Ear and written Vasavi Anthem in Last Page..."},
+];
+
+let list=[],i=0,timer,playing=true;
+
+window.onload=()=>setTimeout(()=>loader.style.display="none",700);
+
+/* INTRO & MUSIC */
+const enterBtn = document.getElementById("enterBtn");
+const music = document.getElementById("music");
+music.volume = 0;
+function fadeInMusic(){
+  let v = 0;
+  music.play();
+  const fade = setInterval(()=>{
+    v += 0.04;
+    music.volume = Math.min(v,0.85);
+    if(v >= 0.85) clearInterval(fade);
+  },150);
+}
+enterBtn.onclick = () => {
+  intro.classList.add("fadeOut");
+  fadeInMusic();
+};
+
+/* 3D SLIDESHOW */
+const stage = document.getElementById("stage");
+const thumbs = document.getElementById("thumbs");
+const caption = document.getElementById("caption");
+
+function openShow(t){
+  home.style.display="none";
+  slideshow.style.display="block";
+  list=t==="creativity"?creativity:logical;
+  i=0;build();show();start();
+}
+
+function show(){
+  stage.innerHTML="";
+  caption.textContent = list[i].cap;
+  
+  list.forEach((p,j)=>{
+    const img = document.createElement("img");
+    img.src = p.src;
+    let delta = j - i;
+    img.style.transform = `translate(-50%, -50%) rotateY(${delta * 30}deg) translateZ(500px)`;
+    img.style.opacity = Math.abs(delta) > 3 ? 0 : 1;
+    stage.appendChild(img);
+  });
+}
+
+function next(){i=(i+1)%list.length;show()}
+function prev(){i=(i-1+list.length)%list.length;show()}
+
+function start(){stop();timer=setInterval(next,4000);pp.textContent="Pause";playing=true}
+function stop(){clearInterval(timer);pp.textContent="Play";playing=false}
+function playPause(){playing?stop():start()}
+
+function build(){
+  thumbs.innerHTML="";
+  list.forEach((p,j)=>{
+    let im=document.createElement("img");
+    im.src=p.src;
+    im.onclick=()=>{i=j;show();stop()};
+    thumbs.appendChild(im);
+  });
+}
+
+function back(){stop();slideshow.style.display="none";home.style.display="flex"}
+
+/* EXTRAS */
+function toggleTheme(){document.documentElement.classList.toggle("light")}
+function toggleMusic(){music.paused?music.play():music.pause()}
+function toggleFS(){!document.fullscreenElement?document.documentElement.requestFullscreen():document.exitFullscreen()}
+</script>
+</body>
+</html>
