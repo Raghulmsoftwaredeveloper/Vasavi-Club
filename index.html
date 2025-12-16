@@ -430,7 +430,7 @@ body::after{
 
   #caption{
     top: auto;
-    bottom: 140px; /* space above fixed nav buttons */
+    bottom: 180px; /* space above fixed nav buttons */
     left: 50%;
     transform: translateX(-50%);
 
@@ -622,7 +622,8 @@ body::after{
 
   /* Make space so buttons don't overlap image */
   #slideshow{
-    padding-bottom: 120px;
+    height: 100vh;          /* full screen */
+    padding-top: 20px;      /* small breathing space */
   }
 }
 /* @keyframes captionDrop{
@@ -830,6 +831,7 @@ function toggleFS(){!document.fullscreenElement?document.documentElement.request
 </script>
 </body>
 </html>
+
 
 
 
