@@ -430,7 +430,7 @@ body::after{
 
   #caption{
     top: auto;
-    bottom: 130px; /* space above fixed nav buttons */
+    bottom: 140px; /* space above fixed nav buttons */
     left: 50%;
     transform: translateX(-50%);
 
@@ -533,7 +533,7 @@ body::after{
     max-height:220px;
   }
 
-  #caption{
+  /* #caption{
     bottom:30px;
     font-size:13px;
     padding:8px 12px;
@@ -541,7 +541,7 @@ body::after{
     text-align:center;
     animation: captionDrop .5s ease;
 
-  }
+  } */
 
   /* Bottom controls */
   #bottom{
@@ -578,11 +578,11 @@ body::after{
     bottom: 0;
   }
 }
-  @media (max-width:768px){
+  /* @media (max-width:768px){
   #caption{
     bottom:30px;
     animation: captionDrop .5s ease;
-  }
+  } */
 }
 
   /* ================= MOBILE NAV BUTTON FIX ================= */
@@ -625,7 +625,7 @@ body::after{
     padding-bottom: 120px;
   }
 }
-@keyframes captionDrop{
+/* @keyframes captionDrop{
   from{
     opacity:0;
     transform:translate(-50%,-10px);
@@ -634,7 +634,7 @@ body::after{
     opacity:1;
     transform:translate(-50%,0);
   }
-}
+} */
 @keyframes captionFade{
   from{
     opacity:0;
@@ -830,6 +830,7 @@ function toggleFS(){!document.fullscreenElement?document.documentElement.request
 </script>
 </body>
 </html>
+
 
 
 
