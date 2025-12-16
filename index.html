@@ -790,7 +790,12 @@ function show(){
 
   caption.style.animation = "none";
   caption.offsetHeight; // force reflow
+  if (window.innerWidth <= 768) {
+  caption.style.animation = "mobileCaptionIn .45s ease forwards";
+} else {
   caption.style.animation = "captionFade .6s ease forwards";
+}
+
   caption.textContent = list[i].cap;
 
   list.forEach((p,j)=>{
@@ -831,6 +836,7 @@ function toggleFS(){!document.fullscreenElement?document.documentElement.request
 </script>
 </body>
 </html>
+
 
 
 
