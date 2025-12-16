@@ -258,37 +258,47 @@ h1{
 
 #caption{
   position:absolute;
-  top:20px;
+  top:22px;
   left:50%;
   transform:translateX(-50%);
 
-  max-width:80%;
-  padding:10px 22px;
+  max-width:85%;
+  padding:14px 26px;
 
-  background: linear-gradient(
-    135deg,
-    rgba(0,0,0,.75),
-    rgba(0,0,0,.45)
-  );
+  background:
+    linear-gradient(
+      135deg,
+      rgba(0,0,0,.75),
+      rgba(0,0,0,.45)
+    );
 
-  border-radius:30px;
+  border-radius:26px;
   border:1px solid rgba(255,255,255,.35);
 
   color:#fff;
-  font-size:16px;
-  font-weight:600;
-  letter-spacing:.6px;
+  font-size:15px;
+  font-weight:500;
+  letter-spacing:.4px;
   text-align:center;
-  line-height:1.4;
+  line-height:1.6;
 
   box-shadow:
-    0 10px 30px rgba(0,0,0,.6),
+    0 12px 30px rgba(0,0,0,.55),
     inset 0 0 0 1px rgba(255,255,255,.08);
 
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 
+  opacity:0;
+  animation: captionFade .6s ease forwards;
   z-index:20;
+}
+
+/* Light mode fix */
+.light #caption{
+  background: rgba(255,255,255,.9);
+  color:#111;
+  border:1px solid rgba(0,0,0,.15);
 }
 
 
@@ -597,13 +607,14 @@ body::after{
 @keyframes captionFade{
   from{
     opacity:0;
-    transform:translate(-50%, -10px);
+    transform:translate(-50%, -8px);
   }
   to{
     opacity:1;
     transform:translate(-50%, 0);
   }
 }
+
 
 
 
@@ -743,17 +754,23 @@ function openShow(t){
 
 function show(){
   stage.innerHTML="";
+
+  caption.style.animation = "none";
+  caption.offsetHeight; // force reflow
+  caption.style.animation = "captionFade .6s ease forwards";
   caption.textContent = list[i].cap;
-  
+
   list.forEach((p,j)=>{
     const img = document.createElement("img");
     img.src = p.src;
     let delta = j - i;
-    img.style.transform = `translate(-50%, -50%) rotateY(${delta * 30}deg) translateZ(500px)`;
+    img.style.transform =
+      `translate(-50%, -50%) rotateY(${delta * 30}deg) translateZ(500px)`;
     img.style.opacity = Math.abs(delta) > 3 ? 0 : 1;
     stage.appendChild(img);
   });
 }
+
 
 function next(){i=(i+1)%list.length;show()}
 function prev(){i=(i-1+list.length)%list.length;show()}
@@ -781,6 +798,7 @@ function toggleFS(){!document.fullscreenElement?document.documentElement.request
 </script>
 </body>
 </html>
+
 
 
 
